@@ -1,24 +1,40 @@
-# README
+# Tabilog
+​
+## サイト概要
+### サイトテーマ
+旅行をした人が旅の思い出を記録し、旅行する人が旅行先の情報を得るためのレビューサイト
+​
+### テーマを選んだ理由
+私が旅行をするとき、効率的に観光したいので計画を綿密に立てます。
+また、海外旅行の場合は行先の治安や文化の違い等気を付けるべきことは事前に調べておきたい性格です。
+自分が実際に旅行を計画したとき、行先の情報をネットやSNSで調べましたが、行先や目的によって見るべき場所が異なるので、あちこちのサイトや投稿を行き来することになりました。
+社会人の自分は情報収集に時間を割くことが物理的に難しいため、このようなサイトの往来は非効率的だと感じました。
+この経験から、旅行先のおすすめスポットや気を付けなければならないことなど、必要な情報が一つに集約されたサイトがあればいいなと思い、このテーマにしました。
+実際に旅行した人が体験談を記録することで、「旅行者の立場で見た行先」の姿が明確になり、投稿を見た他のユーザーが旅行の計画を立てやすくなるのではないかと考えています。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+​
+### ターゲットユーザ
+・旅行をするのが好きな人で、自分の旅の記録を残したい人
+・旅行先に悩んでいて、情報収集がしたい人
 
-Things you may want to cover:
+### 主な利用シーン
+・旅の思い出を記録したいとき
+・旅行の計画を立てたいとき
+・今後の旅行先を検討するとき
 
-* Ruby version
+​
+## 設計書
+【実装機能リスト】
+https://docs.google.com/spreadsheets/d/1NnBeHZM6TWdgFUyAVmVazjsN0RYn7FBALqZ0fj8sP9g/edit?usp=sharing
+​
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+​
+## 使用素材
+後ほど作成予定
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
