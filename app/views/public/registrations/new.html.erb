@@ -1,32 +1,38 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-     <div class="title">新規会員登録</div>
-     <%= form_with model: @member, url: member_registration_path do |f| %>
-     <%= render "public/shared/error_messages", resource: resource %>
-     <div class="form-group">
-      <div class="label">ユーザーネーム(User Name)</div>
+    <div class="mx-auto col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mb-9">
+     <h2 class="text-center">新規会員登録</h2><br>
+      <%= form_with model: @member, url: member_registration_path do |f| %>
+      <%= render "public/shared/error_messages", resource: resource %>
+      
       <div class="field">
-       <%= f.text_field :name %>
-      </div>
-      <div class="label">メールアドレス(Email)</div>
+       <%= f.label :name %><br />
+       <%= f.text_field :name, class: "col-12" %>
+      </div><br />
+      
       <div class="field">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-      <div class="label">パスワード(Password)</div>
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-12" %>
+      </div><br />
+      
       <div class="field">
-        <%= f.password_field :password, autocomplete: "new-password" %>
-      </div>
-      <div class="label">パスワード（確認用）</div>
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "col-12" %>
+      </div><br />
+      
       <div class="field">
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "col-12" %>
       </div>
-      <div class="col-4 offset-3"><button class="btn btn-success btn-block">新規登録</button></div>
-     </div>
+      <br>
+      <button class="btn btn-success btn-block">新規登録</button>
+      <br>
+      <div class="bg-light text-black">既に登録済の方</div><br>
+       <%= link_to "こちら", new_member_session_path %>からログインしてください。
+      </div>
+      <%= render "public/shared/links" %>
      <% end %>
     </div>
-
   </div>
-</div>
 
-<%= render "public/shared/links" %>
+
