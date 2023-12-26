@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mb-9">
-      <h2 class="text-center">ログイン</h2><br>
-      <%= form_with model: @member, url: member_session_path do |f| %>
+      <h2 class="text-center">管理者ログイン</h2><br>
+      <%= form_with model: @admin, url: new_admin_session_path do |f| %>
       
       <div class="field">
        <%= f.label :email %><br />
@@ -21,11 +21,8 @@
        </div>
       <% end %>
       
-      <button class="btn btn-success btn-block">ログイン</button>
-      <br>
-      <div class="bg-light text-black">会員登録がお済みでない方</div><br>
-       <%= link_to "こちら", new_member_registration_path %>から新規登録を行ってください。
-
+      <button class="btn btn-primary btn-block">ログイン</button>
+      
       <% end %>
     </div>
   </div>

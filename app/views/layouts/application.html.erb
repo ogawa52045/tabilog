@@ -20,11 +20,40 @@
           <button class="navbar-toggler" type="button" data-toggler="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" >
             <span class="navbar-toggler-icon"></span>
           </button>
-           <li class="nav-item">
-     　      <a class="nav-link text-light" rel="nofollow" data-method="delete" href="/members/sign_out">
-     　　      ログアウト   
-     　      </a>
-    　    </li>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+           <ul class="navbar-nav ml-auto">
+             <% if member_signed_in? %>
+             <p>ようこそ、<%= current_member.name %>さん</p>
+             <li class="nav-item">
+     　      　 <a class="nav-link text-light" rel="nofollow" data-method="delete" href="/members/sign_out">
+     　　        ログアウト   
+     　         </a>
+    　     　 </li>
+    　      　<% elsif admin_signed_in? %>
+    　      　<li class="nav-item">
+    　      　  <a class="nav-link text-light" rel="nofollow" data-method="delete" href="/admin/sign_out">
+     　  　      ログアウト   
+     　        </a>
+    　      　</li>
+    　       <% else %>
+    　       <li class="nav-item">
+    　        <a class="nav-link text-light" href="/about">
+    　         About
+    　        </a>
+    　       </li>
+    　       <li class="nav-item">
+    　        <a class="nav-link text-light" href="<%= new_member_registration_path %>">
+    　         新規登録
+    　        </a>
+    　       </li>
+    　       <li class="nav-item">
+    　        <a class="nav-link text-light" href="<%= new_member_session_path %>">
+    　         ログイン
+    　        </a>
+    　       </li>
+    　      <% end %>
+           </ul>
+    　    </div>
         </div>
       </nav>
     </header>
