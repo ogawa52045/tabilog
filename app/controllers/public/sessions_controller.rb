@@ -28,8 +28,12 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
   
-  def after_sign_out_path(resource)
-    new_member_session_path
+
+  def guest_sign_in
+    member = Member.guest
+    sign_in member
+    flash[:notice] = "ゲストユーザーとしてログインしました"
+    redirect_to root_path
   end
   
   protected

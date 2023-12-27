@@ -15,7 +15,7 @@
       <nav class= "navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
           <a class="navbar-brand" href="/">
-            <span>Tabilog</span>
+            <span><h2>Tabilog</h2></span>
           </a>
           <button class="navbar-toggler" type="button" data-toggler="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" >
             <span class="navbar-toggler-icon"></span>
@@ -26,13 +26,13 @@
              <p>ようこそ、<%= current_member.name %>さん</p>
              <li class="nav-item">
      　      　 <a class="nav-link text-light" rel="nofollow" data-method="delete" href="/members/sign_out">
-     　　        ログアウト   
+     　　        ログアウト
      　         </a>
     　     　 </li>
     　      　<% elsif admin_signed_in? %>
     　      　<li class="nav-item">
     　      　  <a class="nav-link text-light" rel="nofollow" data-method="delete" href="/admin/sign_out">
-     　  　      ログアウト   
+     　  　      ログアウト
      　        </a>
     　      　</li>
     　       <% else %>

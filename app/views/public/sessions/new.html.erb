@@ -23,8 +23,12 @@
       
       <button class="btn btn-success btn-block">ログイン</button>
       <br>
+      <div class="bg-light text-black">ゲストログイン</div><br />
+      <%= link_to "ゲストログイン", members_guest_sign_in_path, method: :post, class: "btn btn-warning, col-12" %>
+      <br />
       <div class="bg-light text-black">会員登録がお済みでない方</div><br>
-       <%= link_to "こちら", new_member_registration_path %>から新規登録を行ってください。
+      <%= link_to "こちら", new_member_registration_path %>から新規登録を行ってください。
+
 
       <% end %>
     </div>
