@@ -1,0 +1,2 @@
+module Piblic::PostsHelper
+end

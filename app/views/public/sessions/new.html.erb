@@ -6,12 +6,12 @@
       
       <div class="field">
        <%= f.label :email %><br />
-       <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "col-12" %>
+       <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "form-control" %>
       </div>
       
       <div class="field">
        <%= f.label :password %><br />
-       <%= f.password_field :password, autocomplete: "current-password",class: "col-12" %> 
+       <%= f.password_field :password, autocomplete: "current-password",class: "form-control" %> 
       </div>
       
       <% if devise_mapping.rememberable? %>
@@ -21,13 +21,16 @@
        </div>
       <% end %>
       
-      <button class="btn btn-success btn-block">ログイン</button>
+      <button class="btn btn-primary btn-block">ログイン</button>
       <br>
       <div class="bg-light text-black">ゲストログイン</div><br />
-      <%= link_to "ゲストログイン", members_guest_sign_in_path, method: :post, class: "btn btn-warning, col-12" %>
+      <%= link_to "ゲストログイン", members_guest_sign_in_path, method: :post, class: "btn btn-warning btn-block" %>
       <br />
-      <div class="bg-light text-black">会員登録がお済みでない方</div><br>
-      <%= link_to "こちら", new_member_registration_path %>から新規登録を行ってください。
+      <div class="bg-light text-black">会員登録がお済みでない方</div>
+      <%= link_to "こちら", new_member_registration_path %>から新規登録を行ってください。<br />
+      <br />
+      <div class="bg-light text-black">管理者の方へ</div>
+      <%= link_to "こちら", admin_session_path %>からログインを行ってください <br />
 
 
       <% end %>

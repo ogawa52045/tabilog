@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  scope module: :public do
+    get 'posts/new'
+    post 'posts' => 'posts#create'
+    get 'posts' => 'posts#index'
+    get 'posts/:id' => 'posts#show' 
+    get 'posts/:id/edit' => 'posts#edit', as: 'edit_post'
+    patch 'posts/:id' => 'posts#update', as: 'update_post'
+  end
+
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
