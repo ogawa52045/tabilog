@@ -11,4 +11,5 @@ class Member < ApplicationRecord
       member.is_deleted = false
     end
   end
+  has_one_attached :image
 end

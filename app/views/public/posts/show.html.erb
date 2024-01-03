@@ -1,5 +1,32 @@
-<h2>タイトル</h2>
-<p><%= @post.title %></p>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-sm-12 col-md-8 col-lg-5 px-sm-0 mb-9">
+     <br>
+     <h2 class="text-center">さんの旅の記録</h2>
+     <br>
+     <div class="text-center">
+      <% if @post.image.attached? %>
+       <%= image_tag @post.image, class: "card-img-top" %>
+      <% else %>
+       <%= image_tag 'no_image', class: "card-img-top" %>
+      <% end %>
+     </div>
+     <div class="text-center">
+       <div class="bg-light text-black">タイトル</div><br>
+       <%= @post.title %>
+     </div><br />
+     <div class="text-center">
+       <div class="bg-light text-black">投稿日時</div><br>
+       <%= @post.created_at.strftime('%Y/%m/%d') %>
+     </div><br />
+     <div class="text-center">
+       <div class="bg-light text-black">旅行先</div>
+     </div><br>
+     <div class="text-center">
+       <div class="bg-light text-black">旅の思い出</div><br />
+       <%= @post.content %>
+     </div><br />
+    </div>
+  </div>
+</div>
 
-<h2>本文</h2>
-<p><%= @post.content %></p>
