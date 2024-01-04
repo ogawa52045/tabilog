@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
   scope module: :public do
-    get 'posts/new'
-    post 'posts' => 'posts#create'
-    get 'posts' => 'posts#index'
-    get 'posts/:id' => 'posts#show', as: 'post'
-    get 'posts/:id/edit' => 'posts#edit', as: 'edit_post'
-    patch 'posts/:id' => 'posts#update', as: 'update_post'
-    delete 'posts/:id' => 'posts#destroy', as: 'destroy_post'
+    resources :posts
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {

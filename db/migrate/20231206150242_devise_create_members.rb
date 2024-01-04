@@ -13,6 +13,10 @@ class DeviseCreateMembers < ActiveRecord::Migration[6.1]
 
       ## Rememberable
       t.datetime :remember_created_at
+      t.string :name, null:false
+      t.string :bio
+      t.boolean :is_deleted
+
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
@@ -31,9 +35,6 @@ class DeviseCreateMembers < ActiveRecord::Migration[6.1]
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
-      t.string :name
-      t.string :bio
-      t.boolean :is_deleted
 
 
       t.timestamps null: false

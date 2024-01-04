@@ -4,7 +4,7 @@
      <br>
      <h2 class="text-center">旅の記録を編集する</h2>
 
-     <%= form_with model: @post, url: update_post_path(@post.id), method: :patch do |f| %>
+     <%= form_with model: @post do |f| %>
      <div class="field">
        <div class="bg-light text-black">タイトル</div><br>
        <%= f.text_field :title, class: "form-control" %>

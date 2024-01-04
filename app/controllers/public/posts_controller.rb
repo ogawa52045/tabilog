@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :is_matching_login_member, only: [:edit, :update]
   def new
     @post = Post.new
   end
@@ -36,5 +37,12 @@ class Public::PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :content, :image)
+  end
+  
+  def is_matching_login_member
+      post = Post.find(params[:id])
+     unless post.member.id == current_member.id
+      redirect_to posts_path
+     end
   end
 end

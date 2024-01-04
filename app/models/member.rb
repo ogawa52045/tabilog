@@ -12,4 +12,5 @@ class Member < ApplicationRecord
     end
   end
   has_one_attached :image
+  has_many :post
 end
