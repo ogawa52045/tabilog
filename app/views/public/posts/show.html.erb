@@ -5,11 +5,7 @@
      <h2 class="text-center">旅の記録</h2>
      <br>
      <div class="text-center">
-      <% if @post.image.attached? %>
        <%= image_tag @post.image, class: "card-img-top" %>
-      <% else %>
-       <%= image_tag 'no_image', class: "card-img-top" %>
-      <% end %>
      </div>
      <div class="text-center">
        <div class="bg-light text-black">タイトル</div><br>
@@ -30,10 +26,12 @@
        <div class="bg-light text-black">旅の思い出</div><br />
        <%= @post.content %>
      </div><br />
-     <% if @post.member_id == current_member %>
+     <div class="text-center">
+     <% if @post.member == current_member %>
       <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-sm btn-success" %>
       <%= link_to "削除する", post_path(@post.id), method: :delete, class: "btn btn-sm btn-danger" %>
      <% end %>
+     </div>
     </div>
   </div>
 </div>

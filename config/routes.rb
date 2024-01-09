@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope module: :public do
-    resources :posts
+    resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {

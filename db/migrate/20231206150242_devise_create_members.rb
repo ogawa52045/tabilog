@@ -13,7 +13,7 @@ class DeviseCreateMembers < ActiveRecord::Migration[6.1]
 
       ## Rememberable
       t.datetime :remember_created_at
-      t.string :name, null:false
+      t.string :name
       t.string :bio
       t.boolean :is_deleted
 

@@ -5,9 +5,13 @@ class Public::PostsController < ApplicationController
   end
   
   def create
-    post = Post.new(post_params)
-    post.save
-    redirect_to post_path(post.id)
+    @post = Post.new(post_params)
+    @post.member_id = current_member.id
+    if @post.save
+     redirect_to posts_path
+    else
+      render :new
+    end
   end
 
   def index
@@ -23,9 +27,12 @@ class Public::PostsController < ApplicationController
   end
   
   def update
-    post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to root_path
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+     redirect_to @post
+    else
+     render :edit
+    end
   end
   
   def destroy
@@ -41,6 +48,10 @@ class Public::PostsController < ApplicationController
   
   def is_matching_login_member
       post = Post.find(params[:id])
+     unless post.member.present?
+     redirect_to posts_path, alert: '関連する会員が存在しません。'
+     return
+     end
      unless post.member.id == current_member.id
       redirect_to posts_path
      end
