@@ -1,0 +1,44 @@
+class Public::MembersController < ApplicationController
+  before_action :is_matching_login_member, only: [:edit, :update, :withdraw]
+  def edit
+    @member = Member.find(params[:id])
+  end
+  
+  def update
+    @member = Member.find(params[:id])
+    if @member.update(user_params)
+      redirect_to member_path(@member.id), notice:"ユーザー情報を更新しました"
+    else
+      render :edit
+    end
+  end
+  
+  def show
+    @member = Member.find(params[:id])
+  end
+
+  def index
+    @member = current_member
+    @members = Member.all
+  end
+  
+  def withdraw
+    @member = Member.find(current_member.id)
+    @member.update(is_deleted: true)
+     reset_session
+    redirect_to root_path
+  end
+  
+  private
+  
+  def member_params
+    params.require(:member).permit(:name, :profile_image, :bio)
+  end
+  
+  def is_matching_login_member
+    member = Member.find(params[:id])
+    unless member.id == current_member.id
+      redirect_to member_path(current_member)
+    end
+  end
+end
