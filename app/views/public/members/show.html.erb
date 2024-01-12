@@ -1,2 +1,54 @@
-<h1>Public::Members#show</h1>
-<p>Find me in app/views/public/members/show.html.erb</p>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3 text-center offset-md-0">
+       <div class="py-4">
+        <h4 class="bg-light text-black">ユーザー情報</h4><br>
+         <%= image_tag @member.get_profile_image(200,200) %>
+       </div>
+       <div class="my-4">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th><%= @member.name %></th>
+            </tr>
+            <tr>
+              <th>Bio</th>
+              <th><%= @member.bio %></th>
+            </tr>
+          </tbody>
+        </table>
+       </div>
+      <div class="button">
+        <% if @member == current_member %>
+         <%= link_to "編集する", edit_member_path(@member.id), class: "btn btn-block btn-success" %>
+        <% end %>
+      </div>
+     </div>
+     <div class="col-md-8 offset-md-1">
+   　　 <h4 class="bg-light text-black"><%= @member.name %>さんの旅ログ</h4>
+  　　<% if @member_posts.present? %>
+    　<div class="row">
+       <% @member_posts.limit(4).each do |post| %>
+        <div class="col-md-3">
+          <div class="card d-flex flex-column h-100">
+            <%= link_to post_path(post.id) do %>
+              <%= image_tag post.image, class: "card-img-top img-fluid rounded", width: 400, height: 350 %>
+            <% end %>
+            <div class="card-body flex-fill">
+              <%= link_to post_path(post.id) do %>
+                <%= post.title %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+       <% end %>
+      </div>
+  <% else %>
+    <p>旅ログはありません</p>
+  <% end %>
+</div>
+     
+    </div>
+  </div>
+</div>

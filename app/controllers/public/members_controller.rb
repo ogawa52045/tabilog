@@ -6,7 +6,7 @@ class Public::MembersController < ApplicationController
   
   def update
     @member = Member.find(params[:id])
-    if @member.update(user_params)
+    if @member.update(member_params)
       redirect_to member_path(@member.id), notice:"ユーザー情報を更新しました"
     else
       render :edit
@@ -15,6 +15,7 @@ class Public::MembersController < ApplicationController
   
   def show
     @member = Member.find(params[:id])
+    @member_posts = @member.posts
   end
 
   def index
@@ -36,9 +37,13 @@ class Public::MembersController < ApplicationController
   end
   
   def is_matching_login_member
-    member = Member.find(params[:id])
-    unless member.id == current_member.id
+    @member = Member.find(params[:id])
+    unless @member.id == current_member.id
       redirect_to member_path(current_member)
     end
+  end
+  
+  def post_params
+    params.require(:post).permit(:title, :image)
   end
 end

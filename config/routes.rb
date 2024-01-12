@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-  scope module: :public do
+    scope module: :public do
     resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-    get "members" => "members#show"
-    get "members/information/edit" => "members#edit"
-    patch "members/" => "members#update"
-    get "members/check" => "members#check"
-    patch "/members/withdraw" => 'members#withdraw'
-
-
-
+    resources :members, only: [:show, :edit, :update] do
+      collection do
+        get 'check'
+        patch 'withdraw'
+      end
+    end
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {

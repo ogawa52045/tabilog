@@ -17,7 +17,9 @@
      </div><br />
       <div class="text-center">
        <div class="bg-light text-black">投稿者</div><br>
-       <%= @post.member.name %>
+       <%= link_to member_path(@post.member.id) do %>
+        <%= @post.member.name %>
+       <% end %>
      </div><br />
      <div class="text-center">
        <div class="bg-light text-black">旅行先</div>

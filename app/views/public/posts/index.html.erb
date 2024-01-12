@@ -15,7 +15,12 @@
               <% end %>
             </p>
             <p class="card-text">旅の記録:<%= post.content %></p>
-            <span>By </span>
+            <span>
+              By
+              <%= link_to member_path(post.member.id) do %>
+               <%= post.member.name %>
+              <% end %>
+            </span>
           </div>
         </div>
       </div>

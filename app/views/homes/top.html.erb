@@ -15,8 +15,9 @@
               <% end %>
 
               <div class="card-body flex-fill">
-                <p class="strong"><%= post.title %></p>
-                <p><%= post.member.name %></p>
+                <%= link_to post_path(post.id) do %>
+                 <%= post.title %>
+                <% end %>
               </div>
             </div>
           </div>

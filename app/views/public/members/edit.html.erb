@@ -4,7 +4,7 @@
      <br>
      <h2 class="text-center">ユーザー情報を編集する</h2>
 
-     <%= form_with model: @member, url: members_path, method: :patch do |f| %>
+     <%= form_with model: @member, url: member_path, method: :patch do |f| %>
      <div class="field">
        <div class="bg-light text-black">プロフィール画像</div><br>
        <%= f.file_field :profile_image, accept: "image/*" %>

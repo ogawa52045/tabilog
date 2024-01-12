@@ -12,7 +12,7 @@ class Member < ApplicationRecord
     end
   end
   has_one_attached :image
-  has_many :post, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_one_attached :profile_image
   
   def get_profile_image(width, height)
