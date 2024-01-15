@@ -21,8 +21,9 @@
        </div>
       <div class="button">
         <% if @member == current_member %>
-         <%= link_to "編集する", edit_member_path(@member.id), class: "btn btn-block btn-success" %>
-        <% end %>
+        　<%= link_to "編集する", edit_member_path(@member.id), class: "btn btn-block btn-success" %>
+        　<%= link_to "退会する", check_members_path, class: "btn btn-block btn-danger" %>
+　　　　<% end %>
       </div>
      </div>
      <div class="col-md-8 offset-md-1">
@@ -48,7 +49,7 @@
     <p>旅ログはありません</p>
   <% end %>
 </div>
-     
+
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 class Public::MembersController < ApplicationController
-  before_action :is_matching_login_member, only: [:edit, :update, :withdraw]
+  before_action :is_matching_login_member, only: [:edit, :update]
   def edit
     @member = Member.find(params[:id])
   end
@@ -24,10 +24,10 @@ class Public::MembersController < ApplicationController
   end
   
   def withdraw
-    @member = Member.find(current_member.id)
+    @member = current_member
     @member.update(is_deleted: true)
      reset_session
-    redirect_to root_path
+   redirect_to root_path
   end
   
   private

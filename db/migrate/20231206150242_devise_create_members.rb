@@ -15,7 +15,7 @@ class DeviseCreateMembers < ActiveRecord::Migration[6.1]
       t.datetime :remember_created_at
       t.string :name
       t.string :bio
-      t.boolean :is_deleted
+      t.boolean :is_deleted, default: 0, null: false
 
 
       ## Trackable

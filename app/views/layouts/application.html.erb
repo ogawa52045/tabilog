@@ -34,6 +34,12 @@
      　　        旅を見る
      　         </a>
     　     　 </li>
+    　     　　<li class="nav-item">
+     　      　 <a class="nav-link text-light" rel="nofollow" data-method="get" href="<%= member_path(current_member.id) %>" >
+     　　        マイページ
+     　         </a>
+    　     　 </li>
+
              <li class="nav-item">
      　      　 <a class="nav-link text-light" rel="nofollow" data-method="delete" href="/members/sign_out">
      　　        ログアウト
@@ -52,12 +58,12 @@
     　        </a>
     　       </li>
     　       <li class="nav-item">
-    　        <a class="nav-link text-light" href="<%= new_member_registration_path %>">
+    　        <a class="nav-link text-light" href="<%= register_path %>">
     　         新規登録
     　        </a>
     　       </li>
     　       <li class="nav-item">
-    　        <a class="nav-link text-light" href="<%= new_member_session_path %>">
+    　        <a class="nav-link text-light" href="<%= login_path %>">
     　         ログイン
     　        </a>
     　       </li>

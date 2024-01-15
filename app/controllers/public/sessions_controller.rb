@@ -25,9 +25,9 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   def after_sign_in_path_for(resource)
-    root_path
+    member_path(current_member.id)
   end
-  
+
 
   def guest_sign_in
     member = Member.guest
@@ -35,10 +35,23 @@ class Public::SessionsController < Devise::SessionsController
     flash[:notice] = "ゲストユーザーとしてログインしました"
     redirect_to root_path
   end
-  
+
   protected
-  
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
+  
+  private
+  def member_state
+    @member = Member.find_by(email: params[:member][:email])
+    return if !@member
+    if @member.valid_password?(params[:member][:password])
+      if @member.is_deleted
+        redirect_to new_member_registration_path
+      else
+        create
+      end
+    end
   end
 end
