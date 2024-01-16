@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   scope module: :public do
-    resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+      resource :post_favorites, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :destroy]
+    end
     resources :members, only: [:show, :edit, :update] do
       collection do
         get 'check'

@@ -1,40 +1,81 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto col-sm-12 col-md-8 col-lg-5 px-sm-0 mb-9">
-     <br>
-     <h2 class="text-center">旅の記録</h2>
-     <br>
-     <div class="text-center">
-       <%= image_tag @post.image, class: "card-img-top" %>
-     </div>
-     <div class="text-center">
-       <div class="bg-light text-black">タイトル</div><br>
-       <%= @post.title %>
-     </div><br />
-     <div class="text-center">
-       <div class="bg-light text-black">投稿日時</div><br>
-       <%= @post.created_at.strftime('%Y/%m/%d') %>
-     </div><br />
+      <br>
+      <h2 class="text-center">旅の記録</h2>
+      <br>
+      <div class="text-center mb-3">
+        <%= image_tag @post.image, class: "card-img-top" %>
+      </div>
+      <div class="text-right mb-3">
+        <% if @post.member == current_member %>
+          <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-sm btn-success" %>
+          <%= link_to "削除する", post_path(@post.id), method: :delete, class: "btn btn-sm btn-danger" %>
+        <% end %>
+      </div>
+      <div class="text-left mb-3">
+        <% if @post.favorited_by?(current_member) %>
+         <p>
+          <%= link_to post_post_favorites_path(@post), method: :delete do %>
+           ♥<%= @post.favorites.count %>いいね
+          <% end %>
+         </p>
+        <% else %>
+         <p>
+          <%= link_to post_post_favorites_path(@post), method: :post do %>
+           ♡<%= @post.favorites.count %>いいね
+          <% end %>
+         </p>
+        <% end %>
+      </div>
       <div class="text-center">
-       <div class="bg-light text-black">投稿者</div><br>
-       <%= link_to member_path(@post.member.id) do %>
-        <%= @post.member.name %>
+        <div class="bg-light text-black">タイトル</div><br>
+        <%= @post.title %>
+      </div><br />
+      <div class="text-center">
+        <div class="bg-light text-black">投稿日時</div><br>
+        <%= @post.created_at.strftime('%Y/%m/%d') %>
+      </div><br />
+      <div class="text-center">
+        <div class="bg-light text-black">投稿者</div><br>
+        <%= link_to member_path(@post.member.id) do %>
+          <%= @post.member.name %>
+        <% end %>
+      </div><br />
+      <div class="text-center">
+        <div class="bg-light text-black">旅行先</div>
+      </div><br>
+      <div class="text-center">
+        <div class="bg-light text-black">旅の思い出</div><br />
+        <%= @post.content %>
+      </div><br />
+     <div class="text-center">
+  　   <div class="bg-light text-black mb-3">コメント</div>
+       <% @post.comments.each do |comment| %>
+       <div class="mb-3 pb-3 border-bottom">
+        <div class="media">
+         <%= image_tag comment.member.get_profile_image(80, 80), class: "mr-2", alt: comment.member.name %>
+          <div class="media-body">
+           <h5><%= comment.comment %></h5>
+           <p class="text-muted text-right mb-0"><%= comment.created_at.strftime('%Y/%m/%d') %>　<%= link_to comment.member.name, member_path(comment.member) %></p>
+           <p class="text-right mb-0">
+            <% if comment.member == current_member %>
+             <%= link_to "[コメントを削除]", post_post_comment_path(comment.post, comment), method: :delete %>
+            <% end %>
+           </p>
+          </div>
+        </div>
+        </div>
        <% end %>
-     </div><br />
-     <div class="text-center">
-       <div class="bg-light text-black">旅行先</div>
-     </div><br>
-     <div class="text-center">
-       <div class="bg-light text-black">旅の思い出</div><br />
-       <%= @post.content %>
-     </div><br />
-     <div class="text-center">
-     <% if @post.member == current_member %>
-      <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-sm btn-success" %>
-      <%= link_to "削除する", post_path(@post.id), method: :delete, class: "btn btn-sm btn-danger" %>
-     <% end %>
      </div>
+
+      <div class="text-center">
+       <div class="bg-light text-black">新規コメントを追加</div><br>
+        <%= form_with model: [@post, @post.comments.build], url: post_post_comments_path(@post) do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
+          <%= f.submit "送信する", class: "text-right btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
-

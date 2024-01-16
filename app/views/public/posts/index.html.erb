@@ -14,13 +14,18 @@
                 <strong><span><%= post.title %></span></strong>
               <% end %>
             </p>
-            <p class="card-text">旅の記録:<%= post.content %></p>
+            <p class="card-text">【旅の記録】<br><%= post.content %></p>
             <span>
               By
               <%= link_to member_path(post.member.id) do %>
                <%= post.member.name %>
               <% end %>
-            </span>
+            </span><br>
+            <div class="text-right">
+             <span>
+               <%= link_to "コメント#{post.comments.count}件", post_path(post.id) %> ♥<%= post.favorites.count %>いいね
+             </span>
+            </div>
           </div>
         </div>
       </div>

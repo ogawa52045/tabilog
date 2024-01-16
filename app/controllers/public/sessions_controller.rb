@@ -44,10 +44,10 @@ class Public::SessionsController < Devise::SessionsController
   
   private
   def member_state
-    @member = Member.find_by(email: params[:member][:email])
-    return if !@member
-    if @member.valid_password?(params[:member][:password])
-      if @member.is_deleted
+    member = Member.find_by(email: params[:member][:email])
+    return if !member
+    if member.valid_password?(params[:member][:password])
+      if member.is_deleted
         redirect_to new_member_registration_path
       else
         create

@@ -1,5 +1,5 @@
 class Public::MembersController < ApplicationController
-  before_action :is_matching_login_member, only: [:edit, :update]
+  before_action :authenticate_member!
   def edit
     @member = Member.find(params[:id])
   end
@@ -24,9 +24,10 @@ class Public::MembersController < ApplicationController
   end
   
   def withdraw
-    @member = current_member
+    @member = Member.find(current_member.id)
     @member.update(is_deleted: true)
      reset_session
+     flash[:notice] = "退会処理を実行いたしました"
    redirect_to root_path
   end
   

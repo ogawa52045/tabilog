@@ -2,16 +2,18 @@
 <html>
   <head>
     <title>Tabilog</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <script src="htpps://kit.fontawesome.com/98ef09a9a3.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body class="d-flex flex-column vh-100">
-    <header>
+    <header class="shadow-sm">
       <nav class= "navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
           <a class="navbar-brand" href="/">
@@ -23,7 +25,6 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
            <ul class="navbar-nav ml-auto">
              <% if member_signed_in? %>
-             <p>ようこそ、<%= current_member.name %>さん</p>
              <li class="nav-item">
      　      　 <a class="nav-link text-light" rel="nofollow" data-method="get" href="/posts/new">
      　　        旅を記録する
