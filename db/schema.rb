@@ -82,14 +82,6 @@ ActiveRecord::Schema.define(version: 2024_01_16_153250) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
-  create_table "post_comments", force: :cascade do |t|
-    t.text "comment"
-    t.integer "member_id"
-    t.integer "post_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "posts", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

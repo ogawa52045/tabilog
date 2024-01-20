@@ -28,9 +28,6 @@ Rails.application.routes.draw do
   
   devise_scope :member do
     get 'login', to: 'public/sessions#new'
-  end
-  
-  devise_scope :member do  
     get 'register', to: 'public/registrations#new'
   end
 

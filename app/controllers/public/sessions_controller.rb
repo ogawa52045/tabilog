@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+  before_action :reject_member, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
+  
 
   # GET /resource/sign_in
   # def new
@@ -24,11 +26,7 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  def after_sign_in_path_for(resource)
-    member_path(current_member.id)
-  end
-
-
+ 
   def guest_sign_in
     member = Member.guest
     sign_in member
@@ -42,16 +40,18 @@ class Public::SessionsController < Devise::SessionsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
   
-  private
-  def member_state
-    member = Member.find_by(email: params[:member][:email])
-    return if !member
-    if member.valid_password?(params[:member][:password])
-      if member.is_deleted
-        redirect_to new_member_registration_path
-      else
-        create
+   def reject_member
+    @member = Member.find_by(email: params[:member][:email].downcase)
+    if @member
+      if (@member.valid_password?(params[:member][:password]) && (@member.active_for_authentication? == false))
+        flash[:error] = "退会済みです。"
+        redirect_to new_member_session_path
       end
+    else
+      flash[:error] = "必須項目を入力してください。"
     end
   end
+
+  
+
 end

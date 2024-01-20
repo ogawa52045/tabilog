@@ -3,6 +3,7 @@
     <div class="mx-auto col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mb-9">
       <h2 class="text-center">ログイン</h2><br>
       <%= form_with model: @member, url: member_session_path do |f| %>
+      <%= flash[:error] %>
       
       <div class="field">
        <%= f.label :email %><br />
