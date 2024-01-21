@@ -2,6 +2,7 @@ class Public::PostsController < ApplicationController
   before_action :is_matching_login_member, only: [:edit, :update]
   def new
     @post = Post.new
+    @post.build_destination
   end
   
   def create
@@ -44,7 +45,7 @@ class Public::PostsController < ApplicationController
   
   private
   def post_params
-    params.require(:post).permit(:title, :content, :image)
+    params.require(:post).permit(:title, :content, :image, destination_attributes: [:departure_date, :return_date, :domestic_or_international, :country, :prefecture, :city, :landmark])
   end
   
   def is_matching_login_member

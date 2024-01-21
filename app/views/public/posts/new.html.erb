@@ -1,36 +1,62 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto col-sm-12 col-md-8 col-lg-5 px-sm-0 mb-9">
-     <br>
-     <h2 class="text-center">旅を記録する</h2>
-     <div class="text-center">あなたの旅を記録しましょう！</div><br>
-     <% if @post.errors.any? %>
-      <%= @post.errors.count %>件のエラーが発生しました
-      <ul>
+      <br>
+      <h2 class="text-center">旅を記録する</h2>
+      <div class="text-center">あなたの旅を記録しましょう！</div><br>
+      <% if @post.errors.any? %>
+        <%= @post.errors.count %>件のエラーが発生しました
+        <ul>
           <% @post.errors.full_messages.each do |message| %>
-           <li><%= message %></li>
+            <li><%= message %></li>
           <% end %>
-      </ul>
-     <% end %>
-     <%= form_with model: @post, url: posts_path, method: :post do |f| %>
-     <div class="field">
-       <div class="bg-light text-black">タイトル</div><br>
-       <%= f.text_field :title, class: "form-control" %>
-     </div><br />
-     <div class="field">
-       <div class="bg-light text-black">旅行先</div>
-     </div><br>
-     <div class="field">
-       <div class="bg-light text-black">画像</div><br />
-       <%= f.file_field :image, accept: "image/*" %>
-     </div><br />
-     <div class="field">
-       <div class="bg-light text-black">旅の思い出</div><br />
-       <%= f.text_area :content , class: "form-control" %>
-     </div><br />
-     <button class="btn btn-success btn-block" type="submit">記録する</button>
-     <% end %>
+        </ul>
+      <% end %>
+      <%= form_with(model: @post, url: posts_path, method: :post) do |f| %>
+        <div class="field">
+          <div class="bg-light text-black">タイトル</div><br>
+          <%= f.text_field :title, class: "form-control" %>
+        </div><br />
+        <div class="field">
+          <div class="bg-light text-black">旅行先</div>
+          <div class="form-group">
+            <label for="domestic_or_international">旅行区分</label><br>
+            <%= f.radio_button :domestic_or_international, 'domestic' %> <%= f.label :domestic_or_international, '国内旅行' %>
+            <%= f.radio_button :domestic_or_international, 'international' %> <%= f.label :domestic_or_international, '海外旅行' %>
+          </div>
+          <div class="form-group">
+            <label for="departure_date">旅行期間</label><br>
+            <%= f.date_field :departure_date %>～<%= f.date_field :return_date %>
+          </div>
+          <div class="form-group">
+            <label for="country">国名</label><br>
+            <%= f.text_field :country,placeholder: '例: 日本',class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="prefecture">都市名（大）</label><br>
+            <%= f.text_field :prefecture,placeholder: '例: 東京',class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="city">都市名（小）</label><br>
+            <%= f.text_field :city,placeholder: '例: 港区',class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="landmark">施設名・ランドマーク名</label><br>
+            <%= f.text_field :landmark,placeholder: '例: 東京タワー',class: "form-control" %>
+          </div>
+        </div><br>
+        <div class="field">
+          <div class="bg-light text-black">画像</div><br />
+          <%= f.file_field :image, accept: "image/*" %>
+        </div><br />
+        <div class="field">
+          <div class="bg-light text-black">旅の思い出</div><br />
+          <%= f.text_area :content, class: "form-control" %>
+        </div><br />
+        <button class="btn btn-success btn-block" type="submit">記録する</button>
+      <% end %>
     </div>
   </div>
 </div>
+
 
