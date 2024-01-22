@@ -6,7 +6,7 @@
       <br>
 
       <div class="text-center mb-3">
-        <%= image_tag @post.image, class: "card-img-top" %>
+        <%= image_tag @post.image, class: "card-img-top img-fluid rounded" %>
       </div>
 
       <div class="text-right mb-3">
@@ -19,14 +19,14 @@
       <div class="text-left mb-3">
         <% if @post.favorited_by?(current_member) %>
           <p>
-            <%= link_to post_post_favorites_path(@post), method: :delete do %>
-              ♥<%= @post.favorites.count %>いいね
+            <%= link_to post_post_favorites_path(@post), method: :delete, class: "btn btn-outline-danger" do %>
+              ♥ <%= @post.favorites.count %> いいね
             <% end %>
           </p>
         <% else %>
           <p>
-            <%= link_to post_post_favorites_path(@post), method: :post do %>
-              ♡<%= @post.favorites.count %>いいね
+            <%= link_to post_post_favorites_path(@post), method: :post, class: "btn btn-outline-primary" do %>
+              ♡ <%= @post.favorites.count %> いいね
             <% end %>
           </p>
         <% end %>
@@ -50,24 +50,48 @@
       </div><br />
 
       <!-- 旅行先情報 -->
-      <div class="text-center">
+       <div class="text-center">
         <div class="bg-light text-black">旅行先</div>
         <br>
+
         <% if @post.destination.present? %>
-          <p><strong>旅行期間:</strong> <%= @post.destination.departure_date.strftime('%Y/%m/%d') %> ～ <%= @post.destination.return_date.strftime('%Y/%m/%d') %></p>
-          <p><strong>旅行区分:</strong> <%= @post.destination.domestic_or_international == 'domestic' ? '国内旅行' : '海外旅行' %></p>
+          <div class="row mb-2">
+            <div class="col-6"><strong>【旅行期間】</strong></div>
+            <div class="col-6">
+              <%= @post.destination.departure_date.strftime('%Y/%m/%d') %> ～ <%= @post.destination.return_date.strftime('%Y/%m/%d') %>
+            </div>
+          </div>
 
-          <% if @post.destination.domestic_or_international == 'domestic' %>
-            <p><strong>都道府県:</strong> <%= @post.destination.prefecture %></p>
-          <% else %>
-            <p><strong>国名:</strong> <%= @post.destination.country %></p>
-          <% end %>
+          <div class="row mb-2">
+            <div class="col-6"><strong>【旅行区分】</strong></div>
+            <div class="col-6">
+              <%= @post.destination.domestic_or_international == 'domestic' ? '国内旅行' : '海外旅行' %>
+            </div>
+          </div>
 
-          <p><strong>都市（大）:</strong> <%= @post.destination.city %></p>
-          <p><strong>都市（小）:</strong> <%= @post.destination.landmark %></p>
+          <div class="row mb-2">
+            <div class="col-6"><strong>【国名】</strong></div>
+            <div class="col-6"><%= @post.destination.country %></div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-6"><strong>【都道府県】</strong></div>
+            <div class="col-6"><%= @post.destination.prefecture %></div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-6"><strong>【都市名】</strong></div>
+            <div class="col-6"><%= @post.destination.city %></div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-6"><strong>【施設・ランドマーク】</strong></div>
+            <div class="col-6"><%= @post.destination.landmark %></div>
+          </div>
         <% else %>
-          <p>旅行先情報はありません</p>
+          <p class="text-muted">旅行先情報はありません。</p>
         <% end %>
+
       </div>
       <br>
 
@@ -78,30 +102,33 @@
       </div><br />
 
       <!-- コメント表示 -->
-<div class="text-center">
-  <div class="bg-light text-black mb-3">コメント</div>
-  <% @post.comments.each do |comment| %>
-    <div class="mb-3 pb-3 border-bottom">
-      <div class="media">
-        <%= image_tag comment.member.get_profile_image(80, 80), class: "mr-2", alt: comment.member.name %>
-        <div class="media-body">
-          <h5><%= comment.comment %></h5>
-          <p class="text-muted text-right mb-0"><%= comment.created_at.strftime('%Y/%m/%d') %>　<%= link_to comment.member.name, member_path(comment.member) %></p>
-          <p class="text-right mb-0">
-            <% if comment.member == current_member %>
-              <%= link_to "[コメントを削除]", post_post_comment_path(comment.post, comment), method: :delete %>
-            <% end %>
-          </p>
-        </div>
+      <div class="text-center">
+        <div class="bg-light text-black mb-3">コメント</div>
+        <% @post.comments.each do |comment| %>
+          <div class="mb-3 pb-3 border-bottom">
+            <div class="media">
+              <%= image_tag comment.member.get_profile_image(80, 80), class: "mr-2 rounded-circle", alt: comment.member.name %>
+              <div class="media-body">
+                <h5><%= comment.comment %></h5>
+                <p class="text-muted text-right mb-0"><%= comment.created_at.strftime('%Y/%m/%d') %>　<%= link_to comment.member.name, member_path(comment.member) %></p>
+                <p class="text-right mb-0">
+                  <% if comment.member == current_member %>
+                    <%= link_to "[コメントを削除]", post_post_comment_path(comment.post, comment), method: :delete %>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="text-center">
+        <div class="bg-light text-black">新規コメントを追加</div><br>
+        <%= form_with model: [@post, @post.comments.build], url: post_post_comments_path(@post) do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
+          <%= f.submit "送信する", class: "text-right btn btn-primary mt-3" %>
+        <% end %>
       </div>
     </div>
-  <% end %>
-</div>
-
-<div class="text-center">
-  <div class="bg-light text-black">新規コメントを追加</div><br>
-  <%= form_with model: [@post, @post.comments.build], url: post_post_comments_path(@post) do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
-    <%= f.submit "送信する", class: "text-right btn btn-primary" %>
-  <% end %>
+  </div>
 </div>

@@ -1,31 +1,42 @@
 <div class="card-list-container py-5">
   <% @posts.each do |post| %>
-    <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <div class="card mb-4 mx-auto shadow-lg" style="max-width: 500px;">
       <% if post.image.attached? %>
-       <%= image_tag post.image, class: "card-img-top" %>
+        <%= image_tag post.image, class: "card-img-top" %>
       <% else %>
-       <%= image_tag 'no_image', class: "card-img-top" %>
+        <%= image_tag 'no_image', class: "card-img-top" %>
       <% end %>
       <div class="card-body">
-        <div class="row">
-          <div class="col-10">
-            <p class="card-title">
-              <%= link_to(post_path(post), class: "text-dark") do %>
-                <strong><span><%= post.title %></span></strong>
+        <h5 class="card-title">
+          <%= link_to(post_path(post), class: "text-dark") do %>
+            <strong><%= post.title %></strong>
+          <% end %>
+        </h5>
+        <p class="card-text">【旅行先】
+          <% if post.destination.present? %>
+            <%= "#{post.destination.country} #{post.destination.prefecture} #{post.destination.city} #{post.destination.landmark}" %>
+          <% else %>
+            未設定
+          <% end %>
+        </p>
+        <p class="card-text">【旅の記録】<br><%= post.content %></p>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="text-muted">By
+            <%= link_to member_path(post.member.id) do %>
+              <%= post.member.name %>
+            <% end %>
+          </span>
+          <div class="text-right">
+            <span class="mr-3">
+              <% if post.comments.present? %>
+                <%= link_to "コメント#{post.comments.count}件", post_path(post.id) %>
+              <% else %>
+                コメント0件
               <% end %>
-            </p>
-            <p class="card-text">【旅の記録】<br><%= post.content %></p>
+            </span>
             <span>
-              By
-              <%= link_to member_path(post.member.id) do %>
-               <%= post.member.name %>
-              <% end %>
-            </span><br>
-            <div class="text-right">
-             <span>
-               <%= link_to "コメント#{post.comments.count}件", post_path(post.id) %> ♥<%= post.favorites.count %>いいね
-             </span>
-            </div>
+              ♥<%= post.favorites.count %>いいね
+            </span>
           </div>
         </div>
       </div>

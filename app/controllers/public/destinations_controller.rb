@@ -1,5 +1,5 @@
 class Public::DestinationsController < ApplicationController
-  before_action :set_post, only: [:new, :create, :edit, :update]
+  before_action :set_post, only: [:new, :create, :edit, :update, :show, :index]
   
   def new
     @destination = @post.build_destination
@@ -19,13 +19,26 @@ class Public::DestinationsController < ApplicationController
   end
   
   def update
-    @destination = @post.destination
-    if @destination.update(destination_params)
+    @post = Post.find(params[:id])
+    if destination_blank?(post_params)
+      post_params[:destination_attributes].merge!(_destroy: "1")
+    end
+    if @post.update(post_params)
       redirect_to @post
     else
       render :edit
     end
   end
+
+  
+  def show
+    @destination = @post.destination
+  end
+  
+  def index
+    @destinations = Destination.all
+  end
+  
   
   private
   
