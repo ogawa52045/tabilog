@@ -1,19 +1,15 @@
 class Public::PostsController < ApplicationController
-  before_action :is_matching_login_member, only: [:edit, :update]
+  before_action :is_matching_login_member, only: [:edit, :update, :destroy]
   def new
     @post = Post.new
     @post.build_destination
-    puts @post.destination.inspect
   end
   
   def create
    @post = Post.new(post_params)
-   Rails.logger.debug "Post params: #{post_params}"
-   Rails.logger.debug "Post object: #{@post.inspect}"
-
    @post.member_id = current_member.id
    if @post.save
-    redirect_to posts_path
+    redirect_to redirect_to new_destination_review_path(@destination)
    else
     render :new
    end

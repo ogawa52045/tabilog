@@ -11,6 +11,12 @@ class CreateDestinations < ActiveRecord::Migration[6.1]
       t.string :city
       t.string :landmark
       t.integer :post_id
+      t.integer :overall_rating, null: false
+      t.integer :congestion_rating
+      t.integer :access_rating
+      t.integer :tourist_attraction_rating
+      t.integer :nature_rating
+      t.integer :security_rating
       
     end
   end

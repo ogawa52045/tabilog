@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
       resource :post_favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
-      resources :destinations, only: [:new, :create, :edit, :update, :destroy]
+      resources :destinations, only: [:new, :create, :edit, :update, :destroy] do
+        resources :reviews, only: [:new, :create, :edit, :update, :destroy]
+      end
     end
     resources :members, only: [:show, :edit, :update] do
       collection do

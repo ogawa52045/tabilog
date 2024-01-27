@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_21_125540) do
+ActiveRecord::Schema.define(version: 2024_01_25_124123) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +71,12 @@ ActiveRecord::Schema.define(version: 2024_01_21_125540) do
     t.string "city"
     t.string "landmark"
     t.integer "post_id"
+    t.integer "overall_rating", null: false
+    t.integer "congestion_rating"
+    t.integer "access_rating"
+    t.integer "tourist_attraction_rating"
+    t.integer "nature_rating"
+    t.integer "security_rating"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -103,6 +109,19 @@ ActiveRecord::Schema.define(version: 2024_01_21_125540) do
     t.text "content", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "member_id", null: false
+    t.integer "destination_id", null: false
+    t.integer "star"
+    t.text "review_comment"
+    t.index ["destination_id"], name: "index_reviews_on_destination_id"
+    t.index ["member_id"], name: "index_reviews_on_member_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reviews", "destinations"
+  add_foreign_key "reviews", "members"
 end

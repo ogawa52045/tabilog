@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-sm-12 col-md-8 col-lg-5 px-sm-0 mb-9">
+      <br>
+      <h2 class="text-center"><%= @destination.prefecture %><%= @destination.city %><%= @destination.landmark %>のレビュー</h2>
+      <div class="text-center">次に旅をする人のために、旅先をレビューしましょう！</div>
+      <% if @review.errors.any? %>
+       <%= @review.errors.count %>件のエラーが発生しました
+       <ul>
+         <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+         <% end %>
+       </ul>
+      <% end %>
+      <%= form_with model: [@destination, @review], url: destination_reviews_path(@destination) do |f| %>
+       <div class="field">
+         <div class="bg-light text-black">星をつける</div><br>
+         <ul class="list-group list-group-flush">
+            <li class="list-group-item">混雑具合</li>
+    　　　　　　　　<div class="congestion-rating-stars">
+    　　　　　　　　　　<%= f.hidden_field :congestion_rating, id: "congestion-rating-input" %>
+  　　　　　　　　　 </div>
+            <li class="list-group-item">交通アクセス</li>
+              <div class="access-rating-stars">
+                <%= f.hidden_field :access_rating, id: "access-rating-input" %>
+              </div>
+            <li class="list-group-item">観光スポットの充実</li>
+              <div class="tourist-attraction-rating-stars">
+                <%= f.hidden_field :tourist_attraction_rating, id: "tourist-attraction-rating-input" %>
+              </div>
+            <li class="list-group-item">自然の豊かさ</li>
+              <div class="nature-rating-stars">
+                <%= f.hidden_field :nature_rating, id: "nature-rating-input" %>
+              </div>
+            <li class="list-group-item">治安</li>
+              <div class="security-rating-stars">
+                <%= f.hidden_field :security_rating, id: "security-rating-input" %>
+              </div>
+            <li class="list-group-item">総合評価</li>
+              <div class="overall_rating-stars">
+                <%= f.hidden_field :overall_rating, id: "overall-rating-input" %>
+              </div>
+       </div><br />
+       <div class="field">
+         <div class="bg-light text-black">レビューコメント</div><br>
+          <%= f.text_field :review_comment, class: "form-control" %>
+       </div><br />
+       <button class="btn btn-success btn-block" type="submit">レビューを投稿する</button>
+      <% end %>  
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    // 混雑具合の星評価
+    $('.congestion-rating-stars').raty({
+      size: 36,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn: '<%= asset_path('star-on.png') %>',
+      scoreName: 'review[congestion_rating]',
+      half: false,
+    });
+
+    // 交通アクセスの星評価
+    $('.access-rating-stars').raty({
+      size: 36,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn: '<%= asset_path('star-on.png') %>',
+      scoreName: 'review[access_rating]',
+      half: false,
+    });
+
+    // 観光スポットの充実の星評価
+    $('.tourist-attraction-rating-stars').raty({
+      size: 36,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn: '<%= asset_path('star-on.png') %>',
+      scoreName: 'review[tourist_attraction_rating]',
+      half: false,
+    });
+
+    // 自然の豊かさの星評価
+    $('.nature-rating-stars').raty({
+      size: 36,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn: '<%= asset_path('star-on.png') %>',
+      scoreName: 'review[nature_rating]',
+      half: false,
+    });
+
+    // 治安の星評価
+    $('.security-rating-stars').raty({
+      size: 36,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn: '<%= asset_path('star-on.png') %>',
+      scoreName: 'review[security_rating]',
+      half: false,
+    });
+
+    // 総合評価の星評価
+    $('.overall_rating-stars').raty({
+      size: 36,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn: '<%= asset_path('star-on.png') %>',
+      scoreName: 'review[overall_rating]',
+      half: false,
+    });
+  });
+</script>

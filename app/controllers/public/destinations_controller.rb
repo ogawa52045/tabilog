@@ -33,6 +33,7 @@ class Public::DestinationsController < ApplicationController
   
   def show
     @destination = @post.destination
+    @reviews = @destination.reviews
   end
   
   def index
