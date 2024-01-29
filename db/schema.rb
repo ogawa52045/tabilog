@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2024_01_25_124123) do
     t.string "city"
     t.string "landmark"
     t.integer "post_id"
-    t.integer "overall_rating", null: false
+    t.integer "overall_rating", default: 0, null: false
     t.integer "congestion_rating"
     t.integer "access_rating"
     t.integer "tourist_attraction_rating"

@@ -3,6 +3,7 @@ class Public::DestinationsController < ApplicationController
   
   def new
     @destination = @post.build_destination
+    @review = Review.new
   end
   
   def create
